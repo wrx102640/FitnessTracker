@@ -21,16 +21,21 @@ import java.util.List;
 import static java.time.LocalDate.now;
 import static java.util.Objects.isNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Sample init data loader. If the application is run with `loadInitialData` profile, then on application startup it will fill the database with dummy data,
  * for the manual testing purposes. Loader is triggered by {@link ContextRefreshedEvent } event
  */
 @Component
 @Profile("loadInitialData")
-@Slf4j
+//@Slf4j
 @ToString
 @RequiredArgsConstructor
 class InitialDataLoader {
+
+    private static final Logger log = LoggerFactory.getLogger(InitialDataLoader.class);
 
     private final JpaRepository<User, Long> userRepository;
 

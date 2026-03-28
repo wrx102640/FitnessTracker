@@ -6,7 +6,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "HEALTH_METRICS")
+@Table(name = "health_metrics")
 public class HealthMetrics {
 
     @Id
@@ -29,11 +29,15 @@ public class HealthMetrics {
     @Column(nullable = false)
     private int heartRate;
 
-    public HealthMetrics() {
+    protected HealthMetrics() {
     }
 
-    public HealthMetrics(Long id, User user, LocalDate date, double weight, double height, int heartRate) {
-        this.id = id;
+    public HealthMetrics(
+            final User user,
+            final LocalDate date,
+            final double weight,
+            final double height,
+            final int heartRate) {
         this.user = user;
         this.date = date;
         this.weight = weight;
@@ -45,47 +49,23 @@ public class HealthMetrics {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
     public int getHeartRate() {
         return heartRate;
-    }
-
-    public void setHeartRate(int heartRate) {
-        this.heartRate = heartRate;
     }
 }
