@@ -12,6 +12,10 @@ INSERT INTO health_metrics (id, user_id, date, weight, height, heart_rate) VALUE
                                                                                (1, 1, DATE '2026-03-20', 61.5, 168.0, 62),
                                                                                (2, 2, DATE '2026-03-20', 82.0, 180.0, 71),
                                                                                (3, 3, DATE '2026-03-20', 69.0, 165.0, 74);
+INSERT INTO measurement_note (id, health_metrics_id, note) VALUES
+                                                               (1, 1, 'Good condition'),
+                                                               (2, 2, 'Stable form'),
+                                                               (3, 3, 'Regular check completed');
 
 INSERT INTO trainings (id, user_id, start_time, end_time, activity_type, distance, average_speed) VALUES
                                                                                                       (1, 1, TIMESTAMP '2026-03-18 08:00:00', TIMESTAMP '2026-03-18 09:00:00', 'RUNNING', 10.0, 10.0),
