@@ -1,4 +1,4 @@
-  GitHub Actions CI/CD pipeline for a Java project using Maven
+  #GitHub Actions CI/CD pipeline for a Java project using Maven
   # File path should be: .github/workflows/github-ci-cd.yml
   #
   # Testy podzielone są na stage'e zgodnie z laboratoriami:
