@@ -1,7 +1,7 @@
-INSERT INTO users (id, first_name, last_name, birthday, email) VALUES
-                                                                   (1, 'Emma', 'Johnson', DATE '1998-03-10', 'emma.johnson@domain.com'),
-                                                                   (2, 'Ethan', 'Taylor', DATE '1975-07-21', 'ethan.taylor@domain.com'),
-                                                                   (3, 'Olivia', 'Davis', DATE '1950-11-05', 'olivia.davis@domain.com');
+INSERT INTO users (id, first_name, last_name, birthdate, email) VALUES
+                                                                    (1, 'Emma', 'Johnson', DATE '1998-03-10', 'emma.johnson@domain.com'),
+                                                                    (2, 'Ethan', 'Taylor', DATE '1975-07-21', 'ethan.taylor@domain.com'),
+                                                                    (3, 'Olivia', 'Davis', DATE '1950-11-05', 'olivia.davis@domain.com');
 
 INSERT INTO statistics (id, user_id, total_trainings, total_distance, total_calories_burned) VALUES
                                                                                                  (1, 1, 12, 98.5, 6400),
@@ -12,6 +12,7 @@ INSERT INTO health_metrics (id, user_id, date, weight, height, heart_rate) VALUE
                                                                                (1, 1, DATE '2026-03-20', 61.5, 168.0, 62),
                                                                                (2, 2, DATE '2026-03-20', 82.0, 180.0, 71),
                                                                                (3, 3, DATE '2026-03-20', 69.0, 165.0, 74);
+
 INSERT INTO measurement_note (id, health_metrics_id, note) VALUES
                                                                (1, 1, 'Good condition'),
                                                                (2, 2, 'Stable form'),
