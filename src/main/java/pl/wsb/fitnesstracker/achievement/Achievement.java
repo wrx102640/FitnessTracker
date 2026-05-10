@@ -1,5 +1,6 @@
 package pl.wsb.fitnesstracker.achievement;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,13 +22,14 @@ public class Achievement {
 
     private String name;
 
+    @Column(name = "earned_at")
     private LocalDateTime earnedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Achievement() {
+    protected Achievement() {
     }
 
     public Achievement(String name, LocalDateTime earnedAt, User user) {

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * LAB03 — STAGE 1: encje.
  *
  * Ten plik sprawdza tylko istnienie i strukturę tabel dla nowych encji LAB03
- * (Event, UserEvent, WorkoutSession). NIE używa żadnego repozytorium — zieleni
+ * (Event, UserEvent, WorkoutSession, Achievement). NIE używa żadnego repozytorium — zieleni
  * się wyłącznie na podstawie poprawnych encji JPA.
  *
  * Class should be under src/test/java/pl/wsb/fitnesstracker.
@@ -28,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *   - event
  *   - user_event (z kolumnami user_id, event_id)
  *   - workout_session (z kolumną training_id)
+ *   - achievement (z kolumną user_id)
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
@@ -58,6 +59,13 @@ class Lab03EntitiesTest {
     }
 
     @Test
+    void shouldHaveAchievementTable() throws Exception {
+        try (Connection conn = dataSource.getConnection()) {
+            assertThat(tableExists(conn, "achievement")).isTrue();
+        }
+    }
+
+    @Test
     void eventTableHasPrimaryKey() throws Exception {
         try (Connection conn = dataSource.getConnection()) {
             Set<String> cols = tableColumns(conn, "event");
@@ -81,6 +89,14 @@ class Lab03EntitiesTest {
         }
     }
 
+    @Test
+    void achievementTableHasUserForeignKey() throws Exception {
+        try (Connection conn = dataSource.getConnection()) {
+            Set<String> cols = tableColumns(conn, "achievement");
+            assertThat(cols).contains("id", "user_id");
+        }
+    }
+
     private boolean tableExists(Connection conn, String expectedName) throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
         try (ResultSet rs = meta.getTables(conn.getCatalog(), null, "%", new String[]{"TABLE"})) {
@@ -88,6 +104,7 @@ class Lab03EntitiesTest {
                 String schema = rs.getString("TABLE_SCHEM");
                 if (schema == null) continue;
                 if (!"PUBLIC".equalsIgnoreCase(schema)) continue;
+
                 String name = rs.getString("TABLE_NAME");
                 if (expectedName.equalsIgnoreCase(name)) {
                     return true;
@@ -100,19 +117,23 @@ class Lab03EntitiesTest {
     private Set<String> tableColumns(Connection conn, String tableName) throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
         Set<String> cols = new HashSet<>();
+
         try (ResultSet rs = meta.getColumns(conn.getCatalog(), null, "%", "%")) {
             while (rs.next()) {
                 String schema = rs.getString("TABLE_SCHEM");
                 if (schema == null) continue;
                 if (!"PUBLIC".equalsIgnoreCase(schema)) continue;
+
                 String tbl = rs.getString("TABLE_NAME");
                 if (!tableName.equalsIgnoreCase(tbl)) continue;
+
                 String col = rs.getString("COLUMN_NAME");
                 if (col != null) {
                     cols.add(col.toLowerCase());
                 }
             }
         }
+
         return cols;
     }
 }
